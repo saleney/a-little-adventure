@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Adventure</title>
+<style>
+  :root {
+    --paper: #fffaf0;
+    --ink: #3f463d;
+    --muted: #777b70;
+    --green: #7fa57b;
+    --green-dark: #567456;
+    --yellow: #f3d77b;
+    --blue: #8bb7c7;
+    --pink: #e9a7a1;
+    --purple: #aa9acb;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    min-height: 100%;
+  }
+
+  body {
+    background:
+      radial-gradient(circle at 15% 15%, rgba(243,215,123,.22) 0 55px, transparent 56px),
+      radial-gradient(circle at 86% 18%, rgba(139,183,199,.18) 0 70px, transparent 71px),
+      var(--paper);
+    color: var(--ink);
+    font-family: "Trebuchet MS", "Avenir Next", system-ui, sans-serif;
+  }
+
+  .app {
+    width: min(760px, 100%);
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 22px 18px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .brand {
+    font-size: 15px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    font-weight: 800;
+  }
+
+  .reset {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    padding: 7px 4px;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .screen {
+    width: 100%;
+    text-align: center;
+    padding: 18px 4px;
+    animation: appear .35s ease;
+  }
+
+  @keyframes appear {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .illustration {
+    width: 118px;
+    height: 118px;
+    margin: 0 auto 18px;
+    display: grid;
+    place-items: center;
+    font-size: 68px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.55);
+  }
+
+  .eyebrow {
+    color: var(--green-dark);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 8vw, 62px);
+    line-height: .98;
+    margin: 0 auto 16px;
+    max-width: 650px;
+    font-weight: 700;
+  }
+
+  .story {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(21px, 4.4vw, 28px);
+    line-height: 1.4;
+    max-width: 620px;
+    margin: 0 auto 22px;
+  }
+
+  .small {
+    max-width: 560px;
+    margin: 0 auto 24px;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .choices {
+    width: min(620px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  button.choice {
+    min-height: 116px;
+    border: 1px solid rgba(63,70,61,.09);
+    border-radius: 20px;
+    background: rgba(255,255,255,.72);
+    color: var(--ink);
+    padding: 15px;
+    font: inherit;
+    font-size: 19px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 3px 14px rgba(70,70,50,.045);
+    transition: transform .12s ease, background .12s ease;
+  }
+
+  button.choice:hover {
+    transform: translateY(-2px);
+    background: white;
+  }
+
+  button.choice:active {
+    transform: translateY(1px);
+  }
+
+  .choice .emoji {
+    display: block;
+    font-size: 40px;
+    margin-bottom: 6px;
+  }
+
+  .action {
+    display: inline-block;
+    border: 0;
+    border-radius: 999px;
+    background: var(--green);
+    color: white;
+    padding: 15px 28px;
+    font: inherit;
+    font-weight: 800;
+    font-size: 18px;
+    cursor: pointer;
+    box-shadow: 0 5px 0 var(--green-dark);
+  }
+
+  .action:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 var(--green-dark);
+  }
+
+  .adventure-note {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .offline {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 11px 15px;
+    border-radius: 16px;
+    background: #f8edc7;
+    color: #6c613c;
+    font-size: 15px;
+    line-height: 1.4;
+    max-width: 520px;
+  }
+
+
+  .audio-row {
+    display: flex;
+    justify-content: center;
+    margin: 8px auto 22px;
+  }
+
+  .listen {
+    border: 1px solid rgba(63,70,61,.12);
+    border-radius: 999px;
+    background: rgba(255,255,255,.78);
+    color: var(--ink);
+    padding: 10px 17px;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .listen:active {
+    transform: scale(.98);
+  }
+
+  .choice .choice-text {
+    display: block;
+  }
+
+  .talk-note {
+    max-width: 560px;
+    margin: 14px auto 0;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .mic {
+    border: 0;
+    border-radius: 999px;
+    background: #f4e6ef;
+    color: #78556b;
+    padding: 12px 18px;
+    font: inherit;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  footer {
+    text-align: center;
+    padding-top: 10px;
+    color: #9a9b91;
+    font-size: 12px;
+  }
+
+  @media (max-width: 520px) {
+    .app {
+      padding: 15px 14px 18px;
+    }
+
+    header {
+      margin-bottom: 0;
+    }
+
+    main {
+      align-items: flex-start;
+    }
+
+    .screen {
+      padding: 12px 2px 10px;
+    }
+
+    .illustration {
+      width: 92px;
+      height: 92px;
+      font-size: 52px;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      font-size: 40px;
+    }
+
+    .story {
+      font-size: 23px;
+      margin-bottom: 20px;
+    }
+
+    .small {
+      font-size: 16px;
+    }
+
+    .choices {
+      gap: 10px;
+    }
+
+    button.choice {
+      min-height: 92px;
+      font-size: 17px;
+      border-radius: 18px;
+      padding: 10px;
+    }
+
+    .choice .emoji {
+      font-size: 32px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">A Little Adventure</div>
+    <button class="reset" onclick="startOver()">Start over</button>
+  </header>
+
+  <main id="main"></main>
+
+  <footer>The screen starts the adventure. The real world finishes it.</footer>
+</div>
+
+<script>
+const adventures = {
+  forest: {
+    title: "The Forest",
+    emoji: "🌲",
+    intro: "You step into the forest. The trees are tall, the leaves are wiggly, and somewhere nearby you hear a tiny sound.",
+    question: "SCRITCH SCRITCH SCRITCH. What do you think it is?",
+    choices: [
+      ["🦉", "A bird", "bird"],
+      ["🐿️", "A tiny animal", "animal"],
+      ["👹", "A forest monster", "monster"],
+      ["🦋", "A butterfly", "butterfly"]
+    ]
+  },
+  castle: {
+    title: "The Castle",
+    emoji: "🏰",
+    intro: "You arrive at a castle with a very small door. Suddenly, the door opens all by itself.",
+    question: "Who do you think lives inside?",
+    choices: [
+      ["🐉", "A dragon", "dragon"],
+      ["👑", "A tiny king", "king"],
+      ["🧙", "A friendly wizard", "wizard"],
+      ["🐰", "A very small rabbit", "rabbit"]
+    ]
+  },
+  ocean: {
+    title: "The Ocean",
+    emoji: "🌊",
+    intro: "You are standing beside a sparkling blue ocean. Something shiny washes up near your feet.",
+    question: "What do you think you found?",
+    choices: [
+      ["🐚", "A seashell", "shell"],
+      ["💎", "A treasure", "treasure"],
+      ["🧜", "A mermaid's secret", "secret"],
+      ["🐙", "A little octopus", "octopus"]
+    ]
+  },
+  space: {
+    title: "Outer Space",
+    emoji: "🚀",
+    intro: "WHOOSH! Your rocket lands on a purple planet. You look outside and see three moons.",
+    question: "What should you explore first?",
+    choices: [
+      ["🌙", "The biggest moon", "moon"],
+      ["👽", "The funny little creature", "alien"],
+      ["🏔️", "The sparkly mountain", "mountain"],
+      ["🌈", "The rainbow cloud", "cloud"]
+    ]
+  }
+};
+
+const endings = {
+  bird: {
+    emoji: "🪶",
+    story: "It is a little bird! It has dropped a feather and is looking for it.",
+    nextPrompt: "What should you do with the feather?",
+    nextChoices: [["🔍", "Look for where it came from"], ["🎁", "Give it to someone"], ["🌬️", "Let it fly"], ["🪶", "Find another feather"]],
+    nextResults: ["Look closely at a tree or bush. Maybe the bird left another clue nearby.", "You decide the feather is a tiny gift. Who would you give it to?", "Hold your hand up and imagine a breeze carrying the feather away.", "Look around for another feather or something feather-light."],
+    offline: "Go find something outside that is as light as a feather. What does it feel like?"
+  },
+  animal: {
+    emoji: "🐿️",
+    story: "A tiny squirrel peeks out. He has lost his favorite snack!",
+    nextPrompt: "How can you help the squirrel?",
+    nextChoices: [["🥜", "Look for a snack"], ["🏠", "Help him make a home"], ["👋", "Ask him"], ["🌳", "Explore the tree"]],
+    nextResults: ["Look for something that could be a pretend squirrel snack.", "Build a tiny pretend squirrel home from things nearby.", "Ask the squirrel what he needs most.", "Look around for something a squirrel might notice."],
+    offline: "Find something brown near you. Is it soft, hard, smooth, or bumpy?"
+  },
+  monster: {
+    emoji: "👹",
+    story: "A tiny forest monster appears. He looks surprised to see you. Then he waves.",
+    nextPrompt: "The monster wants to be your friend. What should you do?",
+    nextChoices: [["👋", "Say hello"], ["🎲", "Play a game"], ["😂", "Make it laugh"], ["🎵", "Sing a song"]],
+    nextResults: ["Give your biggest, silliest hello.", "Make up a tiny game your monster could play.", "Make your funniest monster face.", "Make up a tiny monster song."],
+    offline: "Make your best monster face. What sound does your monster make?"
+  },
+  dragon: {
+    emoji: "🐉",
+    story: "A little dragon lives here! He is friendly, but he cannot find his home.",
+    nextPrompt: "What does the dragon need first?",
+    nextChoices: [["🛏️", "A cozy bed"], ["🍎", "Something to eat"], ["🧸", "A toy"], ["🛁", "A bath"]],
+    nextResults: ["Make a tiny cozy place for the dragon.", "Pretend to make the dragon a favorite snack.", "Choose a toy for the dragon and invent a game.", "Pretend to give the dragon a bubbly bath."],
+    offline: "Build a tiny dragon home using pillows, blocks, blankets, or anything you can find."
+  },
+  king: {
+    emoji: "👑",
+    story: "A tiny king lives here. He needs someone to help him plan a very silly royal party.",
+    nextPrompt: "What should happen at the royal party?",
+    nextChoices: [["💃", "A silly dance"], ["🎂", "A pretend feast"], ["🎵", "A royal song"], ["🎈", "A balloon parade"]],
+    nextResults: ["Make up the silliest royal dance you can.", "Set up a pretend feast with whatever you have.", "Make up a royal song.", "Have a pretend balloon parade."],
+    offline: "Find three things that could become decorations for a pretend party."
+  },
+  wizard: {
+    emoji: "🧙",
+    story: "A friendly wizard welcomes you. His magic spell has made every spoon in the castle disappear.",
+    nextPrompt: "Which spell should the wizard try?",
+    nextChoices: [["✨", "Make spoons appear"], ["🧦", "Make socks fly"], ["🌧️", "Make it rain bubbles"], ["🌸", "Make flowers dance"]],
+    nextResults: ["Wave your hands and invent a magic spoon spell.", "Invent a spell that makes socks fly around the room.", "Invent a bubble spell.", "Make up a flower dancing spell."],
+    offline: "Look around your room. Can you find three things that are the same shape?"
+  },
+  shell: {
+    emoji: "🐚",
+    story: "It is a beautiful seashell. When you hold it close, you imagine hearing the ocean.",
+    nextPrompt: "What should you listen for?",
+    nextChoices: [["👂", "A tiny sound"], ["🌊", "A big sound"], ["🐦", "A bird sound"], ["👣", "Footsteps"]],
+    nextResults: [
+      "Listen for the quietest sound you can find.",
+      "Find the biggest sound you can make safely.",
+      "Listen for a bird or imagine one.",
+      "Take a few slow steps and listen."
+    ],
+    offline: "Find something nearby that makes an interesting sound. Listen very carefully."
+  },
+  treasure: {
+    emoji: "💎",
+    story: "You found treasure! But it is not gold. It is a tiny collection of things the ocean thinks are special.",
+    nextPrompt: "Which treasure should you keep?",
+    nextChoices: [["⭐", "The sparkly one"], ["❤️", "The one you love"], ["🪨", "The funny one"], ["🐚", "The tiny one"]],
+    nextResults: ["Find something sparkly or shiny nearby.", "Choose something small that makes you happy.", "Find something that makes you giggle.", "Find something tiny and special."],
+    offline: "Find three little treasures where you are. You decide what makes them special."
+  },
+  secret: {
+    emoji: "🧜",
+    story: "A mermaid has left you a secret message. You cannot read it yet. You have to discover the code.",
+    nextPrompt: "What kind of secret should it be?",
+    nextChoices: [["🤫", "A silly word"], ["🔐", "A secret message"], ["👽", "An alien word"], ["🐸", "A frog word"]],
+    nextResults: ["Invent the funniest secret word you can.", "Whisper a tiny pretend secret to someone you trust.", "Invent a word only an alien would know.", "Invent a word that sounds like a frog."],
+    offline: "Make up a secret word. Can someone in your family guess what it means?"
+  },
+  moon: {
+    emoji: "🌙",
+    story: "You land on the biggest moon. Everything is quiet enough to hear your own footsteps.",
+    nextPrompt: "What do you want to discover?",
+    nextChoices: [["👣", "Your footsteps"], ["🌌", "A quiet sound"], ["🐦", "A bird"], ["🍃", "The wind"]],
+    nextResults: ["Take a few slow steps and listen to each one.", "Stand very still and listen for the tiniest sound.", "Listen for a bird or imagine one.", "Listen to the wind or make a gentle wind sound."],
+    offline: "Stand very still for ten seconds. What can you hear?"
+  },
+  alien: {
+    emoji: "👽",
+    story: "The funny little creature says hello. It has never met a human before.",
+    nextPrompt: "How will you say hello?",
+    nextChoices: [["👋", "With your hands"], ["🗣️", "With your voice"], ["🕺", "With a dance"], ["🎵", "With a song"]],
+    nextResults: ["Invent an alien wave.", "Invent an alien word for hello.", "Invent an alien dance.", "Invent an alien hello song."],
+    offline: "Invent a new alien greeting. What does it sound like?"
+  },
+  mountain: {
+    emoji: "🏔️",
+    story: "The sparkly mountain glows in the distance. It looks like it is made of tiny stars.",
+    nextPrompt: "What should go at the top?",
+    nextChoices: [["🚩", "A flag"], ["🏡", "A tiny house"], ["🌳", "A tree"], ["🐉", "A dragon"]],
+    nextResults: ["Make a tiny flag for the top of your mountain.", "Build a tiny home at the top of your mountain.", "Add a tiny tree to your mountain.", "Imagine a dragon living at the top."],
+    offline: "Build the tallest mountain you can from whatever is nearby."
+  },
+
+  butterfly: {
+    emoji: "🦋",
+    story: "A bright butterfly flutters past your nose. It lands on a flower and waits for you to notice its wings.",
+    nextPrompt: "Where should the butterfly go next?",
+    nextChoices: [["🌼", "A flower"], ["🌳", "A tree"], ["🌈", "A rainbow"], ["☀️", "The sunshine"]],
+    nextResults: [
+      "Look for a flower nearby and notice its colors.",
+      "Look for a tree and see what you can find underneath it.",
+      "Imagine a butterfly flying through a rainbow.",
+      "Feel the sunshine and imagine where the butterfly might go."
+    ],
+    offline: "Find something outside with a color that matches the butterfly."
+  },
+  rabbit: {
+    emoji: "🐰",
+    story: "A tiny rabbit hops out of the castle. It has a very important question for you.",
+    nextPrompt: "What should you ask the rabbit?",
+    nextChoices: [["🏠", "Where do you live?"], ["🥕", "What do you eat?"], ["🎵", "Do you like music?"], ["🌙", "Do you sleep at night?"]],
+    nextResults: [
+      "Imagine where a tiny castle rabbit might live.",
+      "Pretend to make the rabbit its favorite snack.",
+      "Make up a song the rabbit might like.",
+      "Imagine what a rabbit dreams about."
+    ],
+    offline: "Find something small nearby and imagine it belongs to the rabbit."
+  },
+  octopus: {
+    emoji: "🐙",
+    story: "A little octopus pops out of the water. It has eight arms and is carrying something in each one.",
+    nextPrompt: "What should the octopus carry?",
+    nextChoices: [["🐚", "Shells"], ["⭐", "Tiny stars"], ["🪨", "Smooth rocks"], ["🌸", "Flowers"]],
+    nextResults: [
+      "Find three little things that could be pretend shells.",
+      "Look for something shiny and imagine it is a tiny star.",
+      "Find something smooth and imagine it came from the ocean.",
+      "Imagine an octopus carrying flowers with eight arms."
+    ],
+    offline: "Find three small objects and line them up like the octopus is carrying them."
+  },
+  cloud: {
+    emoji: "🌈",
+    story: "A rainbow cloud floats toward your rocket. It looks soft enough to touch.",
+    nextPrompt: "What shape does the cloud make?",
+    nextChoices: [["🐳", "A whale"], ["🐲", "A dragon"], ["🏠", "A house"], ["🍦", "An ice cream"]],
+    nextResults: [
+      "Look up and find a cloud shape if you can.",
+      "Make up a cloud dragon and decide what it can do.",
+      "Imagine who lives inside a cloud house.",
+      "Imagine the biggest cloud ice cream flavor."
+    ],
+    offline: "Look at the sky or imagine a cloud. What shape do you see?"
+  }
+
+};
+
+
+function normalizeAdventureChoices() {
+  Object.values(endings).forEach(e => {
+    e.nextChoices = e.nextChoices || [];
+    e.nextResults = e.nextResults || [];
+    while (e.nextResults.length < e.nextChoices.length) {
+      const label = e.nextChoices[e.nextResults.length]?.[1] || "something unexpected";
+      e.nextResults.push(`You chose ${label.toLowerCase()}. What do you think happens next?`);
+    }
+  });
+}
+
+normalizeAdventureChoices();
+
+function render(html) {
+  document.getElementById("main").innerHTML = `<section class="screen">${html}</section>`;
+}
+
+
+function speak(text) {
+  if (!("speechSynthesis" in window)) {
+    alert("Audio is not available in this browser.");
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  const voices = window.speechSynthesis.getVoices();
+  const preferredNames = [
+    "Samantha",
+    "Karen",
+    "Moira",
+    "Ava",
+    "Allison",
+    "Victoria",
+    "Google US English"
+  ];
+
+  let voice = null;
+  for (const preferred of preferredNames) {
+    voice = voices.find(v => v.name.includes(preferred) && /en-US|en_US/i.test(v.lang));
+    if (voice) break;
+  }
+
+  if (!voice) {
+    voice = voices.find(v => /en-US|en_US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  if (voice) utterance.voice = voice;
+  utterance.rate = 0.84;
+  utterance.pitch = 1.02;
+  utterance.volume = 1;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => {};
+}
+
+function speakChoice(result) {
+  const e = endings[result];
+  speak(e.story + " " + e.offline);
+}
+
+function speakAdventure(key) {
+  const a = adventures[key];
+  speak(a.intro + " " + a.question);
+}
+
+function speakHome() {
+  speak("Where should we go? Pick a place. Make some choices. See what happens.");
+}
+
+function speakEnding(result) {
+  const e = endings[result];
+  speak(e.story + " " + e.offline);
+}
+
+function home() {
+  render(`
+    <div class="illustration">✨</div>
+    <h1>Where should we go?</h1>
+    <div class="audio-row">
+      <button class="listen" onclick="speakHome()">🔊 Hear it</button>
+    </div>
+    <p class="small">Pick a place. Make some choices. See what happens.</p>
+    <div class="choices">
+      ${Object.entries(adventures).map(([key, a]) => `
+        <button class="choice" onclick="begin('${key}')">
+          <span class="emoji">${a.emoji}</span>${a.title}
+        </button>
+      `).join("")}
+    </div>
+  `);
+}
+
+function begin(key) {
+  const a = adventures[key];
+  render(`
+    <div class="illustration">${a.emoji}</div>
+    <p class="story">${a.intro}</p>
+    <p class="story"><strong>${a.question}</strong></p>
+    <div class="audio-row">
+      <button class="listen" onclick="speakAdventure('${key}')">🔊 Hear the story</button>
+    </div>
+    <div class="choices">
+      ${a.choices.map(([emoji, label, result]) => `
+        <button class="choice" onclick="choose('${result}')">
+          <span class="emoji">${emoji}</span>
+          <span class="choice-text">${label}</span>
+        </button>
+      `).join("")}
+    </div>
+    <p class="talk-note">Tell your grown-up what you think happens next.</p>
+  `);
+}
+
+
+function choose(result) {
+  const e = endings[result];
+  render(`
+    <div class="illustration">${e.emoji}</div>
+    <p class="story">${e.story}</p>
+    <div class="audio-row">
+      <button class="listen" onclick="speakEnding('${result}')">🔊 Hear it</button>
+    </div>
+    <div class="offline"><strong>One more little choice...</strong><br>${e.nextPrompt || "What should you do next?"}</div>
+    <div class="choices" style="margin-top:14px">
+      <button class="choice" onclick="nextStep('${result}', 0)">
+        <span class="emoji">${e.nextChoices[0][0]}</span>
+        <span class="choice-text">${e.nextChoices[0][1]}</span>
+      </button>
+      <button class="choice" onclick="nextStep('${result}', 1)">
+        <span class="emoji">${e.nextChoices[1][0]}</span>
+        <span class="choice-text">${e.nextChoices[1][1]}</span>
+      </button>
+    </div>
+    <div style="margin-top:24px">
+      <button class="action" onclick="home()">Go on another adventure</button>
+    </div>
+  `);
+}
+
+
+
+function speakNextStep(result, choiceIndex) {
+  const e = endings[result];
+  const text = e.nextResults[choiceIndex] || "What do you think happens next?";
+  speak(text);
+}
+
+
+function nextStep(result, choiceIndex) {
+  const e = endings[result];
+  const text = e.nextResults[choiceIndex];
+  const offline = e.offline;
+
+  render(`
+    <div class="illustration">${e.emoji}</div>
+    <p class="story">${text}</p>
+    <div class="audio-row">
+      <button class="listen" onclick="speakNextStep('${result}', ${choiceIndex})">🔊 Hear it</button>
+    </div>
+    <div class="offline">
+      <strong>Now the adventure leaves the screen.</strong><br>${offline}
+    </div>
+    <div style="margin-top:24px">
+      <button class="action" onclick="home()">Go on another adventure</button>
+    </div>
+  `);
+}
+
+function startOver() {
+  window.speechSynthesis?.cancel();
+  home();
+}
+
+home();
+</script>
+</body>
+</html>
