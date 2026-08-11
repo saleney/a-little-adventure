@@ -675,7 +675,7 @@ function begin(key) {
     <p class="story">${a.intro}</p>
     <p class="story"><strong>${a.question}</strong></p>
     <div class="audio-row">
-      <button class="listen" onclick="speakAdventure('${key}')">🔊 Hear the story</button>
+      <button class="listen" onclick="speakAdventure('${key}')">Hear the story</button>
     </div>
     <div class="choices">
       ${a.choices.map(([emoji, label, result]) => `
@@ -696,7 +696,7 @@ function choose(result) {
     <div class="illustration drawn-mark" aria-hidden="true">${customMark(e.story)}</div>
     <p class="story">${e.story}</p>
     <div class="audio-row">
-      <button class="listen" onclick="speakEnding('${result}')">🔊 Hear it</button>
+      <button class="listen" onclick="speakEnding('${result}')">Hear it</button>
     </div>
     <div class="offline"><strong>One more little choice...</strong><br>${e.nextPrompt || "What should you do next?"}</div>
     <div class="choices" style="margin-top:14px">
@@ -730,10 +730,10 @@ function nextStep(result, choiceIndex) {
   const offline = e.offline;
 
   render(`
-    <div class="illustration">${e.emoji}</div>
+    <div class="illustration drawn-mark" aria-hidden="true">${customMark(e.story)}</div>
     <p class="story">${text}</p>
     <div class="audio-row">
-      <button class="listen" onclick="speakNextStep('${result}', ${choiceIndex})">🔊 Hear it</button>
+      <button class="listen" onclick="speakNextStep('${result}', ${choiceIndex})">Hear it</button>
     </div>
     <div class="offline">
       <strong>Now the adventure leaves the screen.</strong><br>${offline}
