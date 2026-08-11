@@ -323,6 +323,15 @@ body{background:radial-gradient(circle at 8% 11%,rgba(255,228,119,.6) 0 48px,tra
 .salene-home-link{position:fixed;z-index:20;bottom:14px;left:50%;margin:0;padding:8px 11px;border:2px solid var(--ink);border-radius:999px;background:#fffdf7;color:var(--ink);box-shadow:2px 2px 0 var(--ink);font-size:10px;text-decoration:none;transform:translateX(-50%)}.salene-home-link:hover,.salene-home-link:focus-visible{background:var(--yellow);outline:2px solid var(--ink);outline-offset:2px}
 .salene-home-link{position:static;z-index:auto;display:inline-block;margin-top:9px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--ink);font:inherit;text-decoration:none;transform:none}.salene-home-link:hover,.salene-home-link:focus-visible{background:transparent;text-decoration:underline;outline:none}
 .salene-home-link{display:inline-block;margin-top:12px;padding:8px 11px;border:2px solid #293c3b;border-radius:999px;background:#fffdf7;color:#293c3b;box-shadow:2px 2px 0 #293c3b;font:10px "DM Mono",monospace;text-decoration:none}.salene-home-link:hover,.salene-home-link:focus-visible{background:#ffe477;text-decoration:none;outline:2px solid #293c3b;outline-offset:2px}
+
+.drawn-mark{font-family:Fraunces,Georgia,serif;font-weight:700}
+.doodle.mini{width:44px;height:44px;font-size:27px;background:var(--yellow)}
+.choice:nth-child(2) .doodle.mini{background:var(--pink);transform:rotate(6deg)}
+.choice:nth-child(3) .doodle.mini{background:var(--blue);transform:rotate(-3deg)}
+.choice:nth-child(4) .doodle.mini{background:var(--purple);transform:rotate(7deg)}
+button,.brand,.reset,.small,.choice-text{font-family:"Space Grotesk",system-ui,sans-serif}
+.eyebrow,.listen,footer,.salene-home-link{font-family:"DM Mono",monospace}
+h1,h2,.story,.offline,.talk-note,.adventure-note{font-family:Fraunces,Georgia,serif}
 </style>
 </head>
 <body>
@@ -338,6 +347,13 @@ body{background:radial-gradient(circle at 8% 11%,rgba(255,228,119,.6) 0 48px,tra
 </div>
 
 <script>
+const customMarks = ["✦","◌","△","〰","◇","＋","?","!"];
+function customMark(text) {
+  let total = 0;
+  for (const char of String(text)) total += char.codePointAt(0);
+  return customMarks[total % customMarks.length];
+}
+
 const adventures = {
   forest: {
     title: "The Forest",
@@ -655,16 +671,16 @@ function home() {
 function begin(key) {
   const a = adventures[key];
   render(`
-    <div class="illustration">${a.emoji}</div>
+    <div class="illustration drawn-mark" aria-hidden="true">${adventureMarks[key]}</div>
     <p class="story">${a.intro}</p>
     <p class="story"><strong>${a.question}</strong></p>
     <div class="audio-row">
-      <button class="listen" onclick="speakAdventure('${key}')">🔊 Hear the story</button>
+      <button class="listen" onclick="speakAdventure('${key}')">Hear the story</button>
     </div>
     <div class="choices">
       ${a.choices.map(([emoji, label, result]) => `
         <button class="choice" onclick="choose('${result}')">
-          <span class="emoji">${emoji}</span>
+          <span class="doodle mini" aria-hidden="true">${customMark(label)}</span>
           <span class="choice-text">${label}</span>
         </button>
       `).join("")}
@@ -677,19 +693,19 @@ function begin(key) {
 function choose(result) {
   const e = endings[result];
   render(`
-    <div class="illustration">${e.emoji}</div>
+    <div class="illustration drawn-mark" aria-hidden="true">${customMark(e.story)}</div>
     <p class="story">${e.story}</p>
     <div class="audio-row">
-      <button class="listen" onclick="speakEnding('${result}')">🔊 Hear it</button>
+      <button class="listen" onclick="speakEnding('${result}')">Hear it</button>
     </div>
     <div class="offline"><strong>One more little choice...</strong><br>${e.nextPrompt || "What should you do next?"}</div>
     <div class="choices" style="margin-top:14px">
       <button class="choice" onclick="nextStep('${result}', 0)">
-        <span class="emoji">${e.nextChoices[0][0]}</span>
+        <span class="doodle mini" aria-hidden="true">${customMark(e.nextChoices[0][1])}</span>
         <span class="choice-text">${e.nextChoices[0][1]}</span>
       </button>
       <button class="choice" onclick="nextStep('${result}', 1)">
-        <span class="emoji">${e.nextChoices[1][0]}</span>
+        <span class="doodle mini" aria-hidden="true">${customMark(e.nextChoices[1][1])}</span>
         <span class="choice-text">${e.nextChoices[1][1]}</span>
       </button>
     </div>
@@ -714,10 +730,10 @@ function nextStep(result, choiceIndex) {
   const offline = e.offline;
 
   render(`
-    <div class="illustration">${e.emoji}</div>
+    <div class="illustration drawn-mark" aria-hidden="true">${customMark(e.story)}</div>
     <p class="story">${text}</p>
     <div class="audio-row">
-      <button class="listen" onclick="speakNextStep('${result}', ${choiceIndex})">🔊 Hear it</button>
+      <button class="listen" onclick="speakNextStep('${result}', ${choiceIndex})">Hear it</button>
     </div>
     <div class="offline">
       <strong>Now the adventure leaves the screen.</strong><br>${offline}
