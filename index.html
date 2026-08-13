@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Little Adventure</title>
+<title>A Little Adventure — A Read-Aloud Story for Kids</title>
+<meta name="description" content="A choose-your-own-way story for kids and their grown-ups.">
 <style>
   :root {
     --paper: #fffaf0;
@@ -195,7 +196,7 @@
     font-size: 13px;
   }
 
-  .offline {
+.offline {
     display: inline-block;
     margin-top: 16px;
     padding: 11px 15px;
@@ -206,6 +207,20 @@
     line-height: 1.4;
     max-width: 520px;
   }
+
+  .prompt-deck {
+    max-width: 520px;
+    margin: 14px auto 0;
+    padding: 15px;
+    border: 2px solid var(--ink);
+    border-radius: 18px 26px 16px 24px;
+    background: rgba(255,255,255,.62);
+  }
+
+  .prompt-deck strong,
+  .prompt-deck span { display: block; }
+  .prompt-deck span { margin: 7px 0 12px; font: 1.08rem/1.35 Georgia, serif; }
+  .prompt-more { border: 0; background: transparent; color: var(--ink); font: 700 11px "DM Mono", monospace; text-decoration: underline; cursor: pointer; padding: 5px; }
 
 
   .audio-row {
@@ -313,12 +328,13 @@
   }
 /* A shared storybook coat for Salene's project shelf. */
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono&family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Space+Grotesk:wght@500;700&display=swap');
-:root{--paper:#fff8e8;--ink:#293c3b;--muted:#69746d;--green:#91cb8d;--green-dark:#293c3b;--yellow:#ffe477;--blue:#b9e6ee;--pink:#f7b6c8;--purple:#d8c4f1}
-body{background:radial-gradient(circle at 8% 11%,rgba(255,228,119,.6) 0 48px,transparent 49px),radial-gradient(circle at 92% 18%,rgba(185,230,238,.72) 0 66px,transparent 67px),radial-gradient(circle at 13% 91%,rgba(247,182,200,.45) 0 56px,transparent 57px),var(--paper);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif}
+:root{--paper:#e9e3f1;--ink:#292844;--muted:#69667d;--green:#9bc4a1;--green-dark:#292844;--yellow:#f4d98b;--blue:#a9cee0;--pink:#eeb6c7;--purple:#b9a9d4}
+body{background-color:var(--paper);background-image:radial-gradient(circle,rgba(74,65,105,.15) 1px,transparent 1.5px);background-size:27px 27px;color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif}
 .app{width:min(800px,100%);padding:21px 18px;position:relative}.app::before{content:"✦  ·  ✦";position:absolute;top:14px;left:50%;color:var(--pink);font:14px "DM Mono",monospace;letter-spacing:1.2em;transform:translateX(-50%);pointer-events:none}header{position:relative;z-index:1;padding:7px 1px;margin-bottom:8px}.brand{font:11px "DM Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink)}.reset{border:2px solid transparent;border-radius:99px;color:var(--muted);font:11px "DM Mono",monospace;padding:7px 9px}.reset:hover,.reset:focus-visible{border-color:var(--ink);color:var(--ink);outline:none}
 .screen{padding:30px 4px;animation:appear .32s ease}@keyframes appear{from{opacity:0;transform:translateY(9px) rotate(.2deg)}to{opacity:1;transform:none}}.illustration{width:112px;height:112px;margin:0 auto 19px;border:3px solid var(--ink);border-radius:49% 51% 40% 60%;background:var(--yellow);box-shadow:5px 6px 0 rgba(41,60,59,.19);font-size:61px;transform:rotate(-6deg)}.eyebrow{font:10px "DM Mono",monospace;letter-spacing:.09em;color:var(--muted)}h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(3rem,8.5vw,5.3rem);letter-spacing:-.065em;line-height:.85;margin:0 auto 18px}.story{font-family:Fraunces,Georgia,serif;font-size:clamp(1.25rem,4vw,1.72rem);line-height:1.32;letter-spacing:-.02em}.small{font-size:1rem;color:var(--muted)}
 .choices{width:min(640px,100%);gap:13px}button.choice{min-height:120px;border:3px solid var(--ink);border-radius:22px;background:#fffdf7;box-shadow:4px 5px 0 rgba(41,60,59,.2);color:var(--ink);font-family:"Space Grotesk",system-ui,sans-serif;font-size:1rem;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}button.choice:hover,button.choice:focus-visible{background:#dff4ea;transform:translate(-3px,-5px) rotate(-.6deg);box-shadow:9px 11px 0 rgba(41,60,59,.2);outline:none}.choice .emoji{font-size:43px}.doodle{width:48px;height:48px;display:grid;place-items:center;margin:0 auto 9px;border:2px solid var(--ink);border-radius:48% 52% 42% 58%;box-shadow:2px 3px 0 rgba(41,60,59,.18);font:32px/1 Fraunces,Georgia,serif;transform:rotate(-7deg)}.doodle.forest{background:var(--green)}.doodle.castle{background:var(--pink)}.doodle.ocean{background:var(--blue)}.doodle.space{background:var(--purple)}.action{border:3px solid var(--ink);background:var(--green);color:var(--ink);border-radius:99px;box-shadow:4px 4px 0 var(--ink);font-family:"Space Grotesk",system-ui,sans-serif}.action:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}.listen{border:2px solid var(--ink);background:#fff;box-shadow:2px 2px 0 rgba(41,60,59,.18);color:var(--ink);font-family:"DM Mono",monospace;font-size:11px}.offline{border:2px dashed var(--ink);background:#fff0bf;color:var(--ink);border-radius:17px;font-family:Fraunces,Georgia,serif}.talk-note,.adventure-note{font:italic .95rem Fraunces,Georgia,serif}.mic{border:2px solid var(--ink);box-shadow:2px 2px 0 rgba(41,60,59,.18);color:var(--ink)}footer{font:10px "DM Mono",monospace;color:var(--muted)}
 @media(max-width:520px){.app{padding:15px 13px 18px}.app::before{display:none}.screen{padding-top:23px}.illustration{width:92px;height:92px;font-size:51px}h1{font-size:3.35rem}.story{font-size:1.3rem}.choices{gap:9px}button.choice{min-height:96px;font-size:.9rem;padding:10px}.choice .emoji{font-size:34px}}
+@media(min-width:800px){.home-choices{grid-template-columns:repeat(3,1fr);width:min(760px,100%)}}
 .salene-home-link{display:inline-block;margin-top:9px;color:var(--ink);text-decoration:none}.salene-home-link:hover,.salene-home-link:focus-visible{text-decoration:underline;outline:none}
 .salene-home-link{position:fixed;z-index:20;bottom:14px;left:50%;margin:0;padding:8px 11px;border:2px solid var(--ink);border-radius:999px;background:#fffdf7;color:var(--ink);box-shadow:2px 2px 0 var(--ink);font-size:10px;text-decoration:none;transform:translateX(-50%)}.salene-home-link:hover,.salene-home-link:focus-visible{background:var(--yellow);outline:2px solid var(--ink);outline-offset:2px}
 .salene-home-link{position:static;z-index:auto;display:inline-block;margin-top:9px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--ink);font:inherit;text-decoration:none;transform:none}.salene-home-link:hover,.salene-home-link:focus-visible{background:transparent;text-decoration:underline;outline:none}
@@ -326,6 +342,7 @@ body{background:radial-gradient(circle at 8% 11%,rgba(255,228,119,.6) 0 48px,tra
 
 .drawn-mark{font-family:Fraunces,Georgia,serif;font-weight:700}
 .doodle.mini{width:44px;height:44px;font-size:27px;background:var(--yellow)}
+.doodle.garden{background:#c7d89b}.doodle.museum{background:#e8c49d}
 .choice:nth-child(2) .doodle.mini{background:var(--pink);transform:rotate(6deg)}
 .choice:nth-child(3) .doodle.mini{background:var(--blue);transform:rotate(-3deg)}
 .choice:nth-child(4) .doodle.mini{background:var(--purple);transform:rotate(7deg)}
@@ -337,7 +354,7 @@ h1,h2,.story,.offline,.talk-note,.adventure-note{font-family:Fraunces,Georgia,se
 <body>
 <div class="app">
   <header>
-    <div class="brand">A Little Adventure</div>
+    <div class="brand">A Little Adventure · kids + grown-ups</div>
     <button class="reset" onclick="startOver()">Start over</button>
   </header>
 
@@ -358,8 +375,8 @@ const adventures = {
   forest: {
     title: "The Forest",
     emoji: "🌲",
-    intro: "You step into the forest. The trees are tall, the leaves are wiggly, and somewhere nearby you hear a tiny sound.",
-    question: "SCRITCH SCRITCH SCRITCH. What do you think it is?",
+    intro: "You step into the forest. The trees are tall, the leaves are wiggly, and something moves beside a mossy tree.",
+    question: "What do you think is hiding there?",
     choices: [
       ["🦉", "A bird", "bird"],
       ["🐿️", "A tiny animal", "animal"],
@@ -402,6 +419,28 @@ const adventures = {
       ["🏔️", "The sparkly mountain", "mountain"],
       ["🌈", "The rainbow cloud", "cloud"]
     ]
+  },
+  garden: {
+    title: "The Moonlight Garden",
+    intro: "You open a garden gate just as the moon comes out. Every flower is closed, except one that is humming a tiny tune.",
+    question: "What should you do first?",
+    choices: [
+      ["🐝", "Wake the sleepy bees", "bees"],
+      ["🌱", "Look under the leaves", "leaves"],
+      ["🎵", "Hum back", "humming"],
+      ["🪴", "Find the smallest plant", "plant"]
+    ]
+  },
+  museum: {
+    title: "The Tiny Museum",
+    intro: "You find a museum no bigger than a shoebox. Inside, one very ordinary object sits under a golden light.",
+    question: "What belongs in the smallest museum in the world?",
+    choices: [
+      ["🪨", "A very important rock", "rock"],
+      ["🧦", "One mysterious sock", "sock"],
+      ["🔑", "A key with no lock", "key"],
+      ["🥄", "The world's tiniest spoon", "spoon"]
+    ]
   }
 };
 
@@ -409,7 +448,54 @@ const adventureMarks = {
   forest: "♧",
   castle: "♜",
   ocean: "〰",
-  space: "✦"
+  space: "✦",
+  garden: "❀",
+  museum: "▣"
+};
+
+const storyPrompts = {
+  forest: [
+    "What else is hiding somewhere nearby?",
+    "What changes in the forest when the sun goes down?",
+    "If one tree could talk, what would it tell you?",
+    "What would you pack for one night in this forest?",
+    "Who has been quietly following your footprints?"
+  ],
+  castle: [
+    "Which room in the castle are you not supposed to enter?",
+    "What very silly rule does everyone in the castle follow?",
+    "What is hidden at the top of the tallest tower?",
+    "Who is knocking on the castle door now?",
+    "What happens at midnight?"
+  ],
+  ocean: [
+    "What is moving underneath the water?",
+    "Where does the secret underwater path lead?",
+    "What would you name your boat?",
+    "What does the ocean leave on the shore tomorrow?",
+    "Which sea creature becomes your guide?"
+  ],
+  space: [
+    "What does your new planet smell like?",
+    "What do the three moons do when nobody is watching?",
+    "What message appears on the rocket radio?",
+    "What does everyone eat for dinner in space?",
+    "Which strange thing follows your rocket home?"
+  ],
+  garden: [
+    "Which flower only opens when someone tells a joke?",
+    "What tiny creature takes care of the garden at night?",
+    "What is growing behind the locked garden gate?",
+    "What happens when the moonlight touches the pond?",
+    "Which plant would you bring home, and why?"
+  ],
+  museum: [
+    "Which ordinary object deserves the next golden light?",
+    "What exhibit comes alive after closing time?",
+    "Who left a tiny note inside the museum?",
+    "What would the museum refuse to display?",
+    "What object would you donate from your own pocket?"
+  ]
 };
 
 const endings = {
@@ -417,16 +503,16 @@ const endings = {
     emoji: "🪶",
     story: "It is a little bird! It has dropped a feather and is looking for it.",
     nextPrompt: "What should you do with the feather?",
-    nextChoices: [["🔍", "Look for where it came from"], ["🎁", "Give it to someone"], ["🌬️", "Let it fly"], ["🪶", "Find another feather"]],
-    nextResults: ["Look closely at a tree or bush. Maybe the bird left another clue nearby.", "You decide the feather is a tiny gift. Who would you give it to?", "Hold your hand up and imagine a breeze carrying the feather away.", "Look around for another feather or something feather-light."],
+    nextChoices: [["🔍", "Look for where it came from"], ["🪶", "Give it back to the bird"], ["🌬️", "Hold it up in the breeze"], ["◇", "Find a matching feather"]],
+    nextResults: ["Look closely at a tree or bush. Maybe the bird left another clue nearby.", "Hold out the feather and imagine the relieved bird taking it back.", "Hold up your hand and imagine the feather pointing toward the bird.", "Look around for another feather or something with a matching pattern."],
     offline: "Go find something outside that is as light as a feather. What does it feel like?"
   },
   animal: {
     emoji: "🐿️",
     story: "A tiny squirrel peeks out. He has lost his favorite snack!",
     nextPrompt: "How can you help the squirrel?",
-    nextChoices: [["🥜", "Look for a snack"], ["🏠", "Help him make a home"], ["👋", "Ask him"], ["🌳", "Explore the tree"]],
-    nextResults: ["Look for something that could be a pretend squirrel snack.", "Build a tiny pretend squirrel home from things nearby.", "Ask the squirrel what he needs most.", "Look around for something a squirrel might notice."],
+    nextChoices: [["🥜", "Look for a snack"], ["🏠", "Help him make a home"], ["👋", "Ask where he last saw it"], ["🌳", "Search near the tree"]],
+    nextResults: ["Look for something that could be a pretend squirrel snack.", "Build a tiny pretend squirrel home from things nearby.", "Ask the squirrel where he last remembers having his snack.", "Search near the pretend tree for a snack-sized clue."],
     offline: "Find something brown near you. Is it soft, hard, smooth, or bumpy?"
   },
   monster: {
@@ -439,8 +525,8 @@ const endings = {
   },
   dragon: {
     emoji: "🐉",
-    story: "A little dragon lives here! He is friendly, but he cannot find his home.",
-    nextPrompt: "What does the dragon need first?",
+    story: "A little dragon is hiding inside! He is friendly, but he cannot find a cozy place to sleep in this enormous castle.",
+    nextPrompt: "What should you help the dragon with first?",
     nextChoices: [["🛏️", "A cozy bed"], ["🍎", "Something to eat"], ["🧸", "A toy"], ["🛁", "A bath"]],
     nextResults: ["Make a tiny cozy place for the dragon.", "Pretend to make the dragon a favorite snack.", "Choose a toy for the dragon and invent a game.", "Pretend to give the dragon a bubbly bath."],
     offline: "Build a tiny dragon home using pillows, blocks, blankets, or anything you can find."
@@ -455,22 +541,22 @@ const endings = {
   },
   wizard: {
     emoji: "🧙",
-    story: "A friendly wizard welcomes you. His magic spell has made every spoon in the castle disappear.",
-    nextPrompt: "Which spell should the wizard try?",
+    story: "A friendly wizard welcomes you. He is testing a spell book, but every spell does something slightly wrong.",
+    nextPrompt: "Which spell should the wizard test next?",
     nextChoices: [["✨", "Make spoons appear"], ["🧦", "Make socks fly"], ["🌧️", "Make it rain bubbles"], ["🌸", "Make flowers dance"]],
-    nextResults: ["Wave your hands and invent a magic spoon spell.", "Invent a spell that makes socks fly around the room.", "Invent a bubble spell.", "Make up a flower dancing spell."],
+    nextResults: ["Wave your hands and invent a magic spoon spell.", "Invent a spell that makes socks fly around the room.", "Invent a bubble-rain spell.", "Make up a flower-dancing spell."],
     offline: "Look around your room. Can you find three things that are the same shape?"
   },
   shell: {
     emoji: "🐚",
     story: "It is a beautiful seashell. When you hold it close, you imagine hearing the ocean.",
     nextPrompt: "What should you listen for?",
-    nextChoices: [["👂", "A tiny sound"], ["🌊", "A big sound"], ["🐦", "A bird sound"], ["👣", "Footsteps"]],
+    nextChoices: [["👂", "A tiny splash"], ["🌊", "A giant wave"], ["🐦", "A seabird"], ["👣", "Footsteps in the sand"]],
     nextResults: [
-      "Listen for the quietest sound you can find.",
-      "Find the biggest sound you can make safely.",
-      "Listen for a bird or imagine one.",
-      "Take a few slow steps and listen."
+      "Imagine the smallest splash the ocean could make.",
+      "Make the sound of a giant wave crashing safely onto shore.",
+      "Listen for a seabird or invent its call.",
+      "Take a few slow steps and imagine them crunching through sand."
     ],
     offline: "Find something nearby that makes an interesting sound. Listen very carefully."
   },
@@ -485,17 +571,17 @@ const endings = {
   secret: {
     emoji: "🧜",
     story: "A mermaid has left you a secret message. You cannot read it yet. You have to discover the code.",
-    nextPrompt: "What kind of secret should it be?",
-    nextChoices: [["🤫", "A silly word"], ["🔐", "A secret message"], ["👽", "An alien word"], ["🐸", "A frog word"]],
-    nextResults: ["Invent the funniest secret word you can.", "Whisper a tiny pretend secret to someone you trust.", "Invent a word only an alien would know.", "Invent a word that sounds like a frog."],
+    nextPrompt: "How should the secret message be written?",
+    nextChoices: [["◌", "A picture code"], ["🐚", "A shell code"], ["○", "A bubble code"], ["↩", "Backwards words"]],
+    nextResults: ["Draw three simple pictures that stand for a message.", "Choose shell shapes that could stand for different letters.", "Use big and small circles to make a bubble message.", "Say a short word backwards and see if someone can decode it."],
     offline: "Make up a secret word. Can someone in your family guess what it means?"
   },
   moon: {
     emoji: "🌙",
     story: "You land on the biggest moon. Everything is quiet enough to hear your own footsteps.",
-    nextPrompt: "What do you want to discover?",
-    nextChoices: [["👣", "Your footsteps"], ["🌌", "A quiet sound"], ["🐦", "A bird"], ["🍃", "The wind"]],
-    nextResults: ["Take a few slow steps and listen to each one.", "Stand very still and listen for the tiniest sound.", "Listen for a bird or imagine one.", "Listen to the wind or make a gentle wind sound."],
+    nextPrompt: "What sound do you notice first?",
+    nextChoices: [["👣", "Your moon boots"], ["📻", "A distant beep"], ["🚀", "The rocket humming"], ["◌", "A moon rock rolling"]],
+    nextResults: ["Take a few slow moon steps and invent their sound.", "Make the tiny beep of a faraway space signal.", "Hum like a rocket waiting patiently behind you.", "Imagine a moon rock rolling downhill in low gravity."],
     offline: "Stand very still for ten seconds. What can you hear?"
   },
   alien: {
@@ -519,7 +605,7 @@ const endings = {
     emoji: "🦋",
     story: "A bright butterfly flutters past your nose. It lands on a flower and waits for you to notice its wings.",
     nextPrompt: "Where should the butterfly go next?",
-    nextChoices: [["🌼", "A flower"], ["🌳", "A tree"], ["🌈", "A rainbow"], ["☀️", "The sunshine"]],
+    nextChoices: [["🌼", "Another flower"], ["🌳", "A tree"], ["🌈", "A rainbow"], ["☀️", "The sunshine"]],
     nextResults: [
       "Look for a flower nearby and notice its colors.",
       "Look for a tree and see what you can find underneath it.",
@@ -530,7 +616,7 @@ const endings = {
   },
   rabbit: {
     emoji: "🐰",
-    story: "A tiny rabbit hops out of the castle. It has a very important question for you.",
+    story: "A tiny rabbit hops out of the castle. It looks up at you, as if it is waiting for a very important question.",
     nextPrompt: "What should you ask the rabbit?",
     nextChoices: [["🏠", "Where do you live?"], ["🥕", "What do you eat?"], ["🎵", "Do you like music?"], ["🌙", "Do you sleep at night?"]],
     nextResults: [
@@ -558,7 +644,7 @@ const endings = {
     emoji: "🌈",
     story: "A rainbow cloud floats toward your rocket. It looks soft enough to touch.",
     nextPrompt: "What shape does the cloud make?",
-    nextChoices: [["🐳", "A whale"], ["🐲", "A dragon"], ["🏠", "A house"], ["🍦", "An ice cream"]],
+    nextChoices: [["🐳", "A whale"], ["🐲", "A dragon"], ["🏠", "A house"], ["🍦", "An ice cream cone"]],
     nextResults: [
       "Look up and find a cloud shape if you can.",
       "Make up a cloud dragon and decide what it can do.",
@@ -566,6 +652,62 @@ const endings = {
       "Imagine the biggest cloud ice cream flavor."
     ],
     offline: "Look at the sky or imagine a cloud. What shape do you see?"
+  },
+  bees: {
+    story: "Three sleepy bees tumble out of the flower wearing tiny nightcaps. They cannot remember their morning dance.",
+    nextPrompt: "Which dance should you teach them?",
+    nextChoices: [["〰", "The wiggle"], ["◌", "The spin"], ["↟", "The bounce"], ["✦", "The surprise ending"]],
+    nextResults: ["Do your best bee wiggle.", "Spin once, very carefully.", "Invent a bouncy bee step.", "Finish with one completely unexpected move."],
+    offline: "Make up a three-move bee dance and teach it to your grown-up."
+  },
+  leaves: {
+    story: "Under the leaves is a line of ants carrying crumbs to a midnight picnic.",
+    nextPrompt: "What should you bring to the picnic?",
+    nextChoices: [["◇", "Something sweet"], ["△", "Something crunchy"], ["♪", "A picnic song"], ["□", "A tiny blanket"]],
+    nextResults: ["Invent the ants' favorite sweet snack.", "Find something that makes a good crunch sound.", "Sing one line of a midnight picnic song.", "Choose something nearby that could be an ant-sized blanket."],
+    offline: "Set up a tiny pretend picnic using three things you can find."
+  },
+  humming: {
+    story: "You hum back. One by one, the other flowers open and add a new note.",
+    nextPrompt: "What should the garden song sound like?",
+    nextChoices: [["◌", "Soft"], ["!", "Loud"], ["·", "Tiny"], ["〰", "Wiggly"]],
+    nextResults: ["Hum the softest note you can.", "Sing one big garden note.", "Make a sound smaller than a whisper.", "Make your voice wiggle up and down."],
+    offline: "Build a garden song from three sounds you hear around you."
+  },
+  plant: {
+    story: "The smallest plant has exactly two leaves and a sign that says PLEASE TELL ME A STORY.",
+    nextPrompt: "What kind of story does it need?",
+    nextChoices: [["△", "A dragon story"], ["〰", "A rainy story"], ["!", "A silly story"], ["◌", "A sleepy story"]],
+    nextResults: ["Tell about a dragon who is afraid of flowers.", "Tell what happens on the rainiest day ever.", "Begin with the silliest sentence you can think of.", "Tell a story that ends with everyone asleep."],
+    offline: "Tell a one-minute story to a plant, a toy, or your grown-up."
+  },
+  rock: {
+    story: "The rock's museum label says: FOUND SOMEWHERE. IMPORTANT FOR UNKNOWN REASONS.",
+    nextPrompt: "Why is this rock important?",
+    nextChoices: [["△", "It came from a volcano"], ["◌", "It fell from the moon"], ["♜", "It belonged to a queen"], ["?", "Nobody knows"]],
+    nextResults: ["Describe the volcano where it began.", "Decide how it traveled from the moon.", "Invent the queen who once carried it.", "Give the rock one clue without solving the mystery."],
+    offline: "Choose an ordinary object and make it a museum label. Why is it important?"
+  },
+  sock: {
+    story: "The mysterious sock was found alone. Its matching sock has been missing for one hundred years. Probably.",
+    nextPrompt: "Where did the other sock go?",
+    nextChoices: [["✦", "Outer space"], ["△", "A dragon's foot"], ["🌀", "Behind the washing machine"], ["◇", "Into disguise"]],
+    nextResults: ["Imagine the sock floating past a planet.", "Decide what socks a dragon wears.", "Describe the world behind the washing machine.", "Turn the missing sock into a new character."],
+    offline: "Find one sock and invent the wildest reason its match disappeared."
+  },
+  key: {
+    story: "The key is warm in your hand. Every time you ask what it opens, it gives a tiny shake.",
+    nextPrompt: "What should the key open?",
+    nextChoices: [["♧", "A door in a tree"], ["□", "A tiny box"], ["❀", "A forgotten garden gate"], ["▤", "A secret book"]],
+    nextResults: ["Describe what waits behind the tree door.", "Decide what fits inside the tiny box.", "Imagine the forgotten garden on the other side of the gate.", "Give the secret book a title."],
+    offline: "Find something shaped a little like a key. What imaginary thing could it open?"
+  },
+  spoon: {
+    story: "The world's tiniest spoon is used only for stirring extremely small ideas.",
+    nextPrompt: "Which idea should you stir?",
+    nextChoices: [["✦", "A bright idea"], ["!", "A funny idea"], ["♧", "A growing idea"], ["?", "A mystery idea"]],
+    nextResults: ["Name one bright idea worth trying.", "Invent an idea that makes no sense.", "Start with one tiny idea and make it bigger.", "Give the mystery idea a name but do not explain it."],
+    offline: "Choose an ordinary object. Invent its secret, very important job."
   }
 
 };
@@ -588,6 +730,9 @@ function render(html) {
   document.getElementById("main").innerHTML = `<section class="screen">${html}</section>`;
 }
 
+let currentAdventure = null;
+let storyPromptIndex = 0;
+
 
 function speak(text) {
   if (!("speechSynthesis" in window)) {
@@ -598,30 +743,23 @@ function speak(text) {
   window.speechSynthesis.cancel();
 
   const voices = window.speechSynthesis.getVoices();
-  const preferredNames = [
-    "Samantha",
-    "Karen",
-    "Moira",
-    "Ava",
-    "Allison",
-    "Victoria",
-    "Google US English"
-  ];
-
-  let voice = null;
-  for (const preferred of preferredNames) {
-    voice = voices.find(v => v.name.includes(preferred) && /en-US|en_US/i.test(v.lang));
-    if (voice) break;
-  }
-
-  if (!voice) {
-    voice = voices.find(v => /en-US|en_US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang));
-  }
+  const englishVoices = voices.filter(v => /^en(?:-|_)/i.test(v.lang));
+  const preferredNames = ["Ava", "Samantha", "Zoe", "Allison", "Evan", "Karen", "Moira"];
+  const voiceScore = voice => {
+    const name = voice.name.toLowerCase();
+    let score = /en-US|en_US/i.test(voice.lang) ? 30 : 10;
+    if (/premium|enhanced|natural|personal/i.test(name)) score += 100;
+    const preferredIndex = preferredNames.findIndex(preferred => name.includes(preferred.toLowerCase()));
+    if (preferredIndex >= 0) score += 50 - preferredIndex;
+    if (/compact|eloquence|google/i.test(name)) score -= 20;
+    return score;
+  };
+  const voice = englishVoices.sort((a, b) => voiceScore(b) - voiceScore(a))[0] || voices[0];
 
   const utterance = new SpeechSynthesisUtterance(text);
   if (voice) utterance.voice = voice;
-  utterance.rate = 0.84;
-  utterance.pitch = 1.02;
+  utterance.rate = 0.94;
+  utterance.pitch = 1;
   utterance.volume = 1;
 
   window.speechSynthesis.speak(utterance);
@@ -642,7 +780,7 @@ function speakAdventure(key) {
 }
 
 function speakHome() {
-  speak("Where should we go? Pick a place. Make some choices. See what happens.");
+  speak("Where should we go? Pick a place together. Make some choices. See what happens.");
 }
 
 function speakEnding(result) {
@@ -651,14 +789,16 @@ function speakEnding(result) {
 }
 
 function home() {
+  currentAdventure = null;
+  storyPromptIndex = 0;
   render(`
     <div class="illustration">✦</div>
     <h1>Where should we go?</h1>
     <div class="audio-row">
       <button class="listen" onclick="speakHome()">hear it ↗</button>
     </div>
-    <p class="small">Pick a place. Make some choices. See what happens.</p>
-    <div class="choices">
+    <p class="small">Pick a place together. Make some choices. See what happens.</p>
+    <div class="choices home-choices">
       ${Object.entries(adventures).map(([key, a]) => `
         <button class="choice" onclick="begin('${key}')">
           <span class="doodle ${key}" aria-hidden="true">${adventureMarks[key]}</span>${a.title}
@@ -669,6 +809,8 @@ function home() {
 }
 
 function begin(key) {
+  currentAdventure = key;
+  storyPromptIndex = 0;
   const a = adventures[key];
   render(`
     <div class="illustration drawn-mark" aria-hidden="true">${adventureMarks[key]}</div>
@@ -700,14 +842,12 @@ function choose(result) {
     </div>
     <div class="offline"><strong>One more little choice...</strong><br>${e.nextPrompt || "What should you do next?"}</div>
     <div class="choices" style="margin-top:14px">
-      <button class="choice" onclick="nextStep('${result}', 0)">
-        <span class="doodle mini" aria-hidden="true">${customMark(e.nextChoices[0][1])}</span>
-        <span class="choice-text">${e.nextChoices[0][1]}</span>
-      </button>
-      <button class="choice" onclick="nextStep('${result}', 1)">
-        <span class="doodle mini" aria-hidden="true">${customMark(e.nextChoices[1][1])}</span>
-        <span class="choice-text">${e.nextChoices[1][1]}</span>
-      </button>
+      ${e.nextChoices.map((choice, choiceIndex) => `
+        <button class="choice" onclick="nextStep('${result}', ${choiceIndex})">
+          <span class="doodle mini" aria-hidden="true">${customMark(choice[1])}</span>
+          <span class="choice-text">${choice[1]}</span>
+        </button>
+      `).join("")}
     </div>
     <div style="margin-top:24px">
       <button class="action" onclick="home()">Go on another adventure</button>
@@ -728,6 +868,7 @@ function nextStep(result, choiceIndex) {
   const e = endings[result];
   const text = e.nextResults[choiceIndex];
   const offline = e.offline;
+  const prompts = storyPrompts[currentAdventure] || [];
 
   render(`
     <div class="illustration drawn-mark" aria-hidden="true">${customMark(e.story)}</div>
@@ -738,10 +879,24 @@ function nextStep(result, choiceIndex) {
     <div class="offline">
       <strong>Now the adventure leaves the screen.</strong><br>${offline}
     </div>
+    ${prompts.length ? `
+      <div class="prompt-deck">
+        <strong>Keep the story going.</strong>
+        <span id="story-prompt">${prompts[0]}</span>
+        <button class="prompt-more" onclick="anotherStoryPrompt()">another question ↻</button>
+      </div>
+    ` : ""}
     <div style="margin-top:24px">
       <button class="action" onclick="home()">Go on another adventure</button>
     </div>
   `);
+}
+
+function anotherStoryPrompt() {
+  const prompts = storyPrompts[currentAdventure] || [];
+  if (!prompts.length) return;
+  storyPromptIndex = (storyPromptIndex + 1) % prompts.length;
+  document.getElementById("story-prompt").textContent = prompts[storyPromptIndex];
 }
 
 function startOver() {
