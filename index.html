@@ -349,6 +349,24 @@ body{background-color:var(--paper);background-image:radial-gradient(circle,rgba(
 button,.brand,.reset,.small,.choice-text{font-family:"Space Grotesk",system-ui,sans-serif}
 .eyebrow,.listen,footer,.salene-home-link{font-family:"DM Mono",monospace}
 h1,h2,.story,.offline,.talk-note,.adventure-note{font-family:Fraunces,Georgia,serif}
+
+/* A story sheet: retain the illustrated worlds and authored branches. */
+:root{--paper:#f0efeb;--ink:#252622;--muted:#6c695f;--green:#c7d0ba;--green-dark:#98553d;--yellow:#e8d8b4;--blue:#c7d3d1;--pink:#ddc3b5;--purple:#c9c2d0}
+body{background:var(--paper)}.app::before{display:none}
+h1{font-weight:500;line-height:.98}
+.brand,.eyebrow{color:#98553d}
+.illustration,.doodle{border-width:1px;box-shadow:none}
+button.choice{border:0;border-top:1px solid #aaa69b;border-radius:0;background:none;box-shadow:none}
+button.choice:hover,button.choice:focus-visible{background:#e5e2d9;transform:none;box-shadow:none}
+.action,.listen,.mic{min-height:44px;border:1px solid #98553d;border-radius:0;box-shadow:none;background:none;color:#98553d}
+.action{background:#98553d;color:#fff9ef;font:13px "DM Mono",monospace}
+.action:active{transform:translateY(1px);box-shadow:none}
+.offline,.prompt-deck{background:none;border:0;border-top:1px solid #aaa69b;border-radius:0;color:var(--ink)}
+.prompt-more,.reset{min-height:44px}.reset{border-radius:0}
+.salene-home-link{display:inline-flex;align-items:center;min-height:44px;border:0;border-radius:0;background:none;box-shadow:none;padding:8px 0;color:#98553d}
+.salene-home-link:hover,.salene-home-link:focus-visible{background:none;text-decoration:underline;outline-color:#98553d}
+button:focus-visible{outline:2px solid #98553d;outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
